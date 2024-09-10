@@ -21,32 +21,19 @@
     </nav>
 
     <div class="container mt-5">
-        <h1>Garak Scan Results</h1>
-        {% if error %}
-            <div class="alert alert-danger">{{ error }}</div>
-        {% endif %}
-        <table class="table table-striped mt-4">
-            <thead>
-                <tr>
-                    <th>Prompt</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if results %}
-                    {% for result in results %}
-                    <tr>
-                        <td>{{ result['prompt'] }}</td>
-                        <td>{{ result['status'] }}</td>
-                    </tr>
-                    {% endfor %}
-                {% else %}
-                    <tr>
-                        <td colspan="2">No results available</td>
-                    </tr>
-                {% endif %}
-            </tbody>
-        </table>
+        <h1>Garak Scan Reports</h1>
+        <p>Click on a report to view the details in a new tab.</p>
+        <ul class="list-group mt-4">
+            {% if reports %}
+                {% for report in reports %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{{ url_for('main.view_report', filename=report) }}" target="_blank">{{ report }}</a>
+                </li>
+                {% endfor %}
+            {% else %}
+                <li class="list-group-item">No reports available. Please run a scan first.</li>
+            {% endif %}
+        </ul>
     </div>
 </body>
 </html>
